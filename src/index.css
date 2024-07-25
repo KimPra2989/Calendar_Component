@@ -1,0 +1,16 @@
+:root {
+  --background-red: #ffe3e1;
+  --background-yellow: #ffefde;
+  --background-green: #d1f3e9;
+  --background-purple: #e4d4fc;
+
+  --red: #ed6f66;
+  --yellow: #d69249;
+  --green: #0ec28f;
+  --purple: #8961c4;
+}
+
+body {
+  /* margin: 0; */
+  padding: 0;
+}
