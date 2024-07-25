@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { WEEKDAY_KOR } from "../../constant/weekday";
+import useCalendarHeader from "../../hooks/useCalendarHeader";
 
 function CalendarHeader() {
+  const header = useCalendarHeader();
   return (
     <>
-      {WEEKDAY_KOR.map((day) => (
-        <Container key={day}>{day}요일</Container>
+      {header.map((day) => (
+        <Container key={day}>{day}</Container>
       ))}
     </>
   );

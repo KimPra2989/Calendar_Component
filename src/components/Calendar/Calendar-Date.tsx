@@ -45,16 +45,13 @@ const Container = styled.div`
   &:last-child {
     border-right: 1px solid black;
   }
-
-  & .date {
-    font-size: 20px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-  }
 `;
 
 const Date = styled.span<{ $isLastMonth: boolean }>`
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
   color: ${({ $isLastMonth }) => ($isLastMonth ? "#999" : "inherit")};
 `;
 
