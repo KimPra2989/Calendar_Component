@@ -1,12 +1,15 @@
 import styled from "styled-components";
+import { Color } from "../../types/color";
 import Flex from "../shared/Flex";
 
-function CalnedarContents({
-  contents = [{ content: "content1", color: "red" as Color }],
-}) {
+interface CalnedarContentsProps {
+  schedules: { content: string; color: Color }[];
+}
+
+function CalnedarContents({ schedules }: CalnedarContentsProps) {
   return (
-    <Flex $direction="column" $gap={6}>
-      {contents.map(({ content, color }, idx) => (
+    <Flex $direction="column" $align="flex-start" $gap={6}>
+      {schedules.map(({ content, color }, idx) => (
         <Container color={color} key={idx}>
           {content}
         </Container>
@@ -15,8 +18,6 @@ function CalnedarContents({
   );
 }
 
-export type Color = "red" | "yellow" | "green" | "purple";
-
 interface ContainerProps {
   isContinue?: boolean;
   color?: Color;
@@ -24,7 +25,9 @@ interface ContainerProps {
 
 const Container = styled.span<ContainerProps>`
   display: block;
+  width: 100%;
   padding: 4px 6px;
+  box-sizing: border-box;
   ${({ isContinue }) =>
     isContinue ? "margin-right : -8px;margin-left : -8px;" : null}
   color: var(--${({ color }) => (color ? color : "red")});

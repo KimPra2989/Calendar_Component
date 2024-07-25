@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import getSchedules from "../../utils/getSchedules";
+import isHoliday from "../../utils/isHoliday";
+import Flex from "../shared/Flex";
 import CalendarContents from "./Calendar-Contents";
-import mockdate from "../../mockdate";
 
 interface CalendarDateProps {
   day: Date;
@@ -8,14 +10,20 @@ interface CalendarDateProps {
 }
 
 function CalendarDate({ day, displayedMonth }: CalendarDateProps) {
+  const schedules = getSchedules(day)
   const date = day.getDate();
   const isLastMonth = day.getMonth() !== displayedMonth;
 
   return (
     <>
       <Container>
-        <Date $isLastMonth={isLastMonth}>{date}</Date>
-        <CalendarContents contents={mockdate} />
+        <Date $isLastMonth={isLastMonth} $isHoliday={!!isHoliday(day)}>
+          <Flex $gap={12}>
+            <span>{date}</span>
+            <span>{isHoliday(day) ? isHoliday(day)?.name : null}</span>
+          </Flex>
+        </Date>
+        <CalendarContents schedules={schedules} />
       </Container>
     </>
   );
@@ -47,12 +55,12 @@ const Container = styled.div`
   }
 `;
 
-const Date = styled.span<{ $isLastMonth: boolean }>`
+const Date = styled.div<{ $isLastMonth: boolean; $isHoliday: boolean }>`
   font-size: 20px;
   font-weight: bold;
-  display: block;
   margin-bottom: 10px;
-  color: ${({ $isLastMonth }) => ($isLastMonth ? "#999" : "inherit")};
+  color: ${({ $isLastMonth, $isHoliday }) =>
+    $isLastMonth ? "#999" : $isHoliday ? 'var(--red)' : "inherit"};
 `;
 
 export default CalendarDate;
