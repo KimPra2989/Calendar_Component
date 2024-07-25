@@ -1,15 +1,7 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CalendarPage from "./pages/calendar-page";
+import Calendar from "./components/Calendar/Calendar";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <CalendarPage />,
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
+  return <Calendar />;
 }
 
 export default App;
